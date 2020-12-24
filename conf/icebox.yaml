@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icebox
+  labels:
+    app: icebox
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: icebox
+  template:
+    metadata:
+      labels:
+        app: icebox
+    spec:
+      containers:
+      - name: icebox
+        image: docker.io/spencerjp/icebox:0.2
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: icebox
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          serviceName: icebox
+          servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: icebox
+spec:
+  selector:
+    app: icebox
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
