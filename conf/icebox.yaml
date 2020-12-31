@@ -21,19 +21,22 @@ spec:
         ports:
         - containerPort: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: icebox
 spec:
   rules:
-  - http:
+  - host: icebox.spencerjp.dev
+    http:
       paths:
       - path: /
         pathType: Exact
         backend:
-          serviceName: icebox
-          servicePort: 8080
+          service:
+            name: icebox
+            port:
+              number: 8080
 ---
 apiVersion: v1
 kind: Service
