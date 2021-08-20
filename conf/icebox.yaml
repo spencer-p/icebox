@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: icebox
-        image: docker.io/spencerjp/icebox:0.2
+        image: {{IMAGE_TAG}}
         ports:
         - containerPort: 80
 ---
