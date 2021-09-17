@@ -1,4 +1,4 @@
-VERSION=0.8
+VERSION=latest
 IMAGE=spencerjp/icebox
 REPO=docker.io
 IMAGE_TAG=$(REPO)/$(IMAGE):$(VERSION)
